@@ -1,2 +1,7 @@
 [build]
-  publish = "ui_kits/landing"
+  publish = "."
+
+[[redirects]]
+  from = "/"
+  to = "/ui_kits/landing/"
+  status = 301
