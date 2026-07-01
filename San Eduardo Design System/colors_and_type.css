@@ -1,0 +1,159 @@
+/* ============================================================================
+   SAN EDUARDO — Design System · Core Tokens
+   Estancia San Eduardo · Bragado, Buenos Aires
+   "Terracotta intelligence" — where pampas cattle ranching meets data science.
+   ----------------------------------------------------------------------------
+   Aesthetic DNA: warm earth + clover green + wheat gold on bone, espresso ink.
+   Editorial display serif · clean grotesque body · telemetry monospace.
+   ============================================================================ */
+
+/* ---- Web fonts (Google Fonts) -------------------------------------------- *
+ * Display : Hanken Grotesk (800/900) — heavy grotesque, used BIG, italic accents
+ * Body/UI : Hanken Grotesk (300–700) — same family, lighter weights
+ * Mono    : Space Mono — telemetry micro-tags, batch codes, sensor labels
+ * Matches the Lovable "Clay & Clover" brand: one punchy grotesque, bright palette.
+ * NOTE: substitution flagged in README — no original brand fonts were provided.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700;1,800;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  /* ── EARTH / CLAY (primary signature) ─────────────────────────────────── */
+  --clay-900: #5C2A12;   /* deepest fired clay   */
+  --clay-700: #9A4620;   /* terracotta dark      */
+  --clay-500: #C0532E;   /* TERRACOTTA — primary (Lovable) */
+  --clay-400: #D97B45;   /* clay light           */
+  --clay-300: #E89B6C;   /* soft clay            */
+  --clay-100: #F5E0D3;   /* clay wash            */
+  --clay-050: #FBEEE4;   /* faintest clay tint   */
+
+  /* ── PASTURE / CLOVER GREEN ───────────────────────────────────────────── */
+  --forest-900: #0D2B1F; /* near-black forest    */
+  --forest-700: #1B4332; /* deep pasture         */
+  --green-500:  #2D6A4F; /* clover — secondary   */
+  --green-400:  #418A68;
+  --green-300:  #95D5B2; /* fresh sprout         */
+  --green-100:  #DCEFE4; /* green wash           */
+
+  /* ── WHEAT / GOLD (accent — bright, punchy) ───────────────────────────── */
+  --gold-600: #E0A92A;
+  --gold-500: #F2C53D;   /* bright wheat gold — accent (Lovable) */
+  --gold-300: #F7D976;
+  --gold-100: #FCF1CE;   /* amber wash           */
+
+  /* ── INK / NEUTRALS (warm, espresso-based) ────────────────────────────── */
+  --ink-900: #2C1A0E;    /* espresso — primary text */
+  --ink-700: #5C4535;    /* secondary text       */
+  --ink-500: #8B7355;    /* taupe — muted text   */
+  --ink-300: #C9BBA6;    /* hairline on cream    */
+  --line:    #E0D5C5;    /* default border       */
+  --line-soft: #ECE3D5;
+
+  /* ── SURFACES (bone / cream) ──────────────────────────────────────────── */
+  --bone:    #F2EEE3;    /* page background (warm off-white) */
+  --cream:   #FBF8F1;    /* card / panel surface */
+  --paper:   #FFFFFF;    /* crispest surface     */
+  --sand:    #EDE2CF;    /* alt block background */
+
+  /* ── SEMANTIC (status) ────────────────────────────────────────────────── */
+  --ok:      #2D6A4F;    --ok-wash:   #DCEFE4;
+  --warn:    #B7860B;    --warn-wash: #FEF3C7;
+  --alert:   #9A3B26;    --alert-wash:#F8DED4;
+  --sky:     #5B7E94;    /* rare cool accent — pampa sky */
+
+  /* ── EXTRA BRIGHTS (Lovable variety) ──────────────────────────────────── */
+  --crimson:     #E22A48;   /* hot raspberry red  */
+  --crimson-700: #B81F39;
+  --night:       #1A140E;   /* near-black card    */
+  --mint:        #DCFCEA;   /* pale turquoise mint (Lovable) */
+
+  /* ── TYPE FAMILIES ────────────────────────────────────────────────────── */
+  --font-display: 'Hanken Grotesk', system-ui, sans-serif;
+  --font-body:    'Hanken Grotesk', 'Source Sans 3', system-ui, sans-serif;
+  --font-mono:    'Space Mono', 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* ── TYPE SCALE (fluid-ish, px) ───────────────────────────────────────── */
+  --t-display: 88px;     /* hero display          */
+  --t-h1:      56px;
+  --t-h2:      40px;
+  --t-h3:      28px;
+  --t-h4:      21px;
+  --t-lead:    19px;     /* intro paragraph       */
+  --t-body:    16px;
+  --t-small:   14px;
+  --t-eyebrow: 12px;     /* mono uppercase label  */
+  --t-micro:   11px;
+
+  /* ── RADII ────────────────────────────────────────────────────────────── */
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --r-xl: 32px;
+  --r-pill: 999px;
+
+  /* ── SPACING (8pt base) ───────────────────────────────────────────────── */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+  --s-9: 96px; --s-10: 128px;
+
+  /* ── ELEVATION (warm-tinted shadows) ──────────────────────────────────── */
+  --sh-1: 0 1px 2px rgba(44,26,14,0.06), 0 1px 3px rgba(44,26,14,0.05);
+  --sh-2: 0 4px 18px rgba(44,26,14,0.09);
+  --sh-3: 0 16px 40px rgba(44,26,14,0.14);
+  --sh-4: 0 28px 70px rgba(44,26,14,0.20);
+  --ring-gold: 0 0 0 3px rgba(212,160,23,0.30);
+
+  /* ── MOTION ───────────────────────────────────────────────────────────── */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 0.18s;
+  --dur: 0.30s;
+  --dur-slow: 0.6s;
+}
+
+/* ============================================================================
+   SEMANTIC TYPOGRAPHY  (apply these classes, or copy the rules)
+   ============================================================================ */
+.ds-display {
+  font-family: var(--font-display);
+  font-size: var(--t-display);
+  font-weight: 800;
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  color: var(--ink-900);
+}
+.ds-h1 { font-family: var(--font-display); font-size: var(--t-h1); font-weight: 800; line-height: 0.98; letter-spacing: -0.03em; color: var(--ink-900); }
+.ds-h2 { font-family: var(--font-display); font-size: var(--t-h2); font-weight: 800; line-height: 1.02; letter-spacing: -0.025em; color: var(--ink-900); }
+.ds-h3 { font-family: var(--font-body); font-size: var(--t-h3); font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; color: var(--ink-900); }
+.ds-h4 { font-family: var(--font-body); font-size: var(--t-h4); font-weight: 700; line-height: 1.3; color: var(--ink-900); }
+.ds-lead { font-family: var(--font-body); font-size: var(--t-lead); font-weight: 400; line-height: 1.6; color: var(--ink-700); }
+.ds-body { font-family: var(--font-body); font-size: var(--t-body); font-weight: 400; line-height: 1.7; color: var(--ink-700); }
+.ds-small { font-family: var(--font-body); font-size: var(--t-small); font-weight: 400; line-height: 1.55; color: var(--ink-500); }
+
+/* Telemetry eyebrow / data tag — the signature "sensor" label */
+.ds-eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--t-eyebrow);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clay-500);
+}
+.ds-tag {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+}
+
+/* Big editorial stat number — upright bold sans, the brand's hero figure */
+.ds-stat {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--clay-500);
+  font-feature-settings: "tnum" 1;
+}

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>San Eduardo — Deck</title>
+<link rel="icon" href="../assets/favicon.png" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  deck-stage:not(:defined) { visibility: hidden; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1a1a1a; }
+  section { background: var(--bone); color: var(--ink-900); font-family: var(--font-body); overflow: hidden; }
+
+  /* shared slide primitives (scaled for 1920×1080) */
+  .pad { padding: 110px 130px; height: 100%; display: flex; flex-direction: column; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 16px; font-family: var(--font-body); font-size: 22px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay-500); }
+  .eyebrow::before { content: ''; width: 48px; height: 3px; background: var(--gold-500); border-radius: 2px; }
+  .disp { font-family: var(--font-display); font-weight: 800; line-height: 0.98; letter-spacing: -0.035em; color: var(--ink-900); }
+  .mono { font-family: var(--font-mono); }
+  .lead { font-size: 32px; line-height: 1.55; color: var(--ink-700); }
+
+  /* logo lockup */
+  .lock { display: flex; align-items: center; gap: 18px; }
+  .lock img { width: 64px; height: 64px; object-fit: contain; }
+  .lock__name { font-family: var(--font-display); font-weight: 800; font-size: 38px; line-height: 1; letter-spacing: -0.02em; color: var(--ink-900); }
+  .lock__sub { font-family: var(--font-mono); font-size: 16px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-500); }
+
+  /* ── COVER ── */
+  .cover { position: relative; }
+  .cover__bg { position: absolute; inset: 0; background: url(../assets/herd-running.jpg) center 45%/cover; }
+  .cover__scrim { position: absolute; inset: 0; background: linear-gradient(105deg, rgba(13,43,31,0.95), rgba(13,43,31,0.78) 45%, rgba(92,42,18,0.5)); }
+  .cover .pad { position: relative; justify-content: space-between; }
+  .cover__top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .cover .lock__name, .cover .lock__sub { color: var(--cream); }
+  .cover__pill { font-family: var(--font-mono); font-size: 18px; letter-spacing: 0.14em; color: var(--green-300); display: flex; align-items: center; gap: 12px; }
+  .cover__pill::before { content: ''; width: 12px; height: 12px; border-radius: 50%; background: var(--green-300); }
+  .cover__title { font-family: var(--font-display); font-weight: 800; font-size: 168px; line-height: 0.9; letter-spacing: -0.045em; color: var(--cream); }
+  .cover__title em { font-style: italic; color: var(--gold-300); }
+  .cover__sub { font-size: 30px; color: rgba(251,247,240,0.82); max-width: 920px; margin-top: 36px; font-weight: 300; line-height: 1.5; }
+
+  /* ── SECTION DIVIDER ── */
+  .divider { background: var(--clay-500); color: var(--cream); position: relative; }
+  .divider .pad { justify-content: center; }
+  .divider__num { font-family: var(--font-display); font-style: normal; font-weight: 800; font-size: 40px; letter-spacing: -0.02em; color: var(--gold-300); margin-bottom: 24px; }
+  .divider__title { font-family: var(--font-display); font-weight: 800; font-size: 130px; line-height: 0.94; letter-spacing: -0.04em; color: var(--cream); }
+  .divider__line { width: 140px; height: 4px; background: rgba(251,247,240,0.5); margin-top: 40px; }
+
+  /* ── BIG STAT ── */
+  .stat { text-align: center; }
+  .stat .pad { align-items: center; justify-content: center; text-align: center; }
+  .stat__num { font-family: var(--font-display); font-style: normal; font-weight: 900; font-size: 460px; line-height: 0.78; letter-spacing: -0.05em; background: linear-gradient(160deg, var(--clay-400), var(--clay-700)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .stat__cap { font-family: var(--font-mono); font-size: 26px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-500); margin-top: 20px; }
+  .stat__sub { font-size: 30px; color: var(--ink-700); max-width: 1000px; margin-top: 36px; line-height: 1.5; }
+
+  /* ── TWO COL ── */
+  .head-block { margin-bottom: 56px; }
+  .head-block .disp { font-size: 76px; margin-top: 22px; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; flex: 1; align-items: center; }
+  .bars { display: flex; flex-direction: column; gap: 26px; }
+  .bar { display: grid; grid-template-columns: 340px 1fr 90px; align-items: center; gap: 28px; }
+  .bar__l { font-size: 26px; color: var(--ink-700); text-align: right; }
+  .bar__t { height: 30px; background: rgba(196,98,45,0.1); border-radius: 999px; overflow: hidden; }
+  .bar__f { height: 100%; border-radius: 999px; }
+  .bar__v { font-family: var(--font-display); font-style: normal; font-weight: 800; font-size: 32px; letter-spacing: -0.03em; color: var(--ink-900); }
+  .panel-dark { background: var(--forest-900); border-radius: 28px; padding: 54px; color: var(--cream); }
+  .panel-dark h3 { font-family: var(--font-mono); font-size: 20px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green-300); margin-bottom: 32px; }
+  .trow { display: flex; align-items: baseline; gap: 16px; margin-bottom: 26px; }
+  .trow__k { font-family: var(--font-mono); font-size: 22px; color: rgba(251,247,240,0.62); white-space: nowrap; }
+  .trow__d { flex: 1; border-bottom: 2px dotted rgba(149,213,178,0.3); transform: translateY(-6px); }
+  .trow__v { font-family: var(--font-display); font-style: normal; font-weight: 800; font-size: 40px; letter-spacing: -0.03em; color: var(--gold-300); }
+
+  /* ── QUOTE ── */
+  .quote { background: var(--forest-900); color: var(--cream); position: relative; }
+  .quote .pad { justify-content: center; }
+  .quote__mark { font-family: var(--font-display); font-size: 280px; line-height: 0.5; color: var(--clay-400); height: 110px; }
+  .quote__text { font-family: var(--font-display); font-weight: 800; font-size: 76px; line-height: 1.12; letter-spacing: -0.03em; color: var(--cream); max-width: 1400px; }
+  .quote__by { font-family: var(--font-mono); font-size: 22px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-300); margin-top: 48px; }
+
+  /* ── ROADMAP ── */
+  .road { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; flex: 1; align-items: stretch; margin-top: 20px; }
+  .rcard { background: var(--cream); border: 1px solid var(--line); border-top: 6px solid var(--accent); border-radius: 26px; padding: 50px 46px; }
+  .rcard__y { font-family: var(--font-mono); font-size: 19px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .rcard__n { font-family: var(--font-display); font-weight: 800; font-size: 46px; line-height: 1.0; letter-spacing: -0.03em; color: var(--ink-900); margin-bottom: 34px; }
+  .rcard ul { list-style: none; }
+  .rcard li { font-size: 25px; line-height: 1.4; color: var(--ink-700); padding-left: 30px; position: relative; margin-bottom: 22px; }
+  .rcard li::before { content: ''; position: absolute; left: 0; top: 12px; width: 11px; height: 11px; border-radius: 50%; background: var(--accent); }
+
+  /* ── CLOSING ── */
+  .close { background: var(--ink-900); color: var(--cream); }
+  .close .pad { justify-content: center; }
+  .close__grid { display: grid; grid-template-columns: 360px 1fr; gap: 70px; align-items: center; }
+  .close__photo { width: 360px; height: 420px; border-radius: 26px; background: url(../assets/author_pro.jpg) center top/cover; }
+  .close__name { font-family: var(--font-display); font-weight: 800; font-size: 92px; line-height: 1; letter-spacing: -0.04em; color: var(--cream); }
+  .close__role { font-family: var(--font-mono); font-size: 22px; letter-spacing: 0.06em; color: var(--gold-300); margin: 18px 0 34px; }
+  .close__bio { font-size: 28px; line-height: 1.6; color: rgba(251,247,240,0.78); max-width: 880px; margin-bottom: 40px; }
+  .close__link { font-family: var(--font-mono); font-size: 24px; color: var(--green-300); display: flex; align-items: center; gap: 14px; }
+  .chips { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
+  .chip { font-family: var(--font-mono); font-size: 18px; color: var(--green-300); border: 1px solid rgba(149,213,178,0.35); padding: 10px 20px; border-radius: 999px; }
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- 1 · COVER -->
+  <section class="cover" data-label="Portada">
+    <div class="cover__bg"></div><div class="cover__scrim"></div>
+    <div class="pad">
+      <div class="cover__top">
+        <div class="lock"><img src="../assets/logo-mark-cream.png" alt="" /><div><div class="lock__name">San Eduardo</div><div class="lock__sub">Estancia · Bragado, BA</div></div></div>
+        <div class="cover__pill">Sensor: Activo</div>
+      </div>
+      <div>
+        <div class="cover__title">El rodeo,<br><em>leído</em> por los datos.</div>
+        <div class="cover__sub">Selección de vaquillonas en la pampa húmeda — un análisis de inteligencia ganadera sobre cinco años de datos del campo.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · SECTION DIVIDER -->
+  <section class="divider" data-label="Sección">
+    <div class="pad">
+      <div class="divider__num">01</div>
+      <div class="divider__title">El hallazgo<br>principal</div>
+      <div class="divider__line"></div>
+    </div>
+  </section>
+
+  <!-- 3 · BIG STAT -->
+  <section class="stat" data-label="Hallazgo 49%">
+    <div class="pad">
+      <div class="eyebrow">Consistencia de la regla</div>
+      <div class="stat__num">49%</div>
+      <div class="stat__cap">de las decisiones coinciden con la regla escrita</div>
+      <div class="stat__sub">El campo no aplica su propia regla la mitad de las veces. No es un error: es experiencia que todavía no fue escrita — y es justo lo que un modelo podría aprender.</div>
+    </div>
+  </section>
+
+  <!-- 4 · TWO COL (model) -->
+  <section data-label="El Modelo">
+    <div class="pad">
+      <div class="head-block">
+        <div class="eyebrow">Qué vio el modelo</div>
+        <div class="disp">Señal real, honestamente débil.</div>
+      </div>
+      <div class="cols">
+        <div class="bars">
+          <div class="bar"><div class="bar__l">IHM promedio de la madre</div><div class="bar__t"><div class="bar__f" style="width:100%;background:var(--clay-500)"></div></div><div class="bar__v">100</div></div>
+          <div class="bar"><div class="bar__l">Año de nacimiento</div><div class="bar__t"><div class="bar__f" style="width:79%;background:var(--clay-700)"></div></div><div class="bar__v">79</div></div>
+          <div class="bar"><div class="bar__l">Pelaje colorado</div><div class="bar__t"><div class="bar__f" style="width:42%;background:var(--clay-700)"></div></div><div class="bar__v">42</div></div>
+          <div class="bar"><div class="bar__l">Padre tipo IATF</div><div class="bar__t"><div class="bar__f" style="width:34%;background:var(--clay-700)"></div></div><div class="bar__v">34</div></div>
+        </div>
+        <div class="panel-dark">
+          <h3>Panel de telemetría</h3>
+          <div class="trow"><span class="trow__k">Precisión @30% (holdout)</span><span class="trow__d"></span><span class="trow__v">35%</span></div>
+          <div class="trow"><span class="trow__k">Selección al azar</span><span class="trow__d"></span><span class="trow__v">30%</span></div>
+          <div class="trow"><span class="trow__k">Población supervisada</span><span class="trow__d"></span><span class="trow__v">337</span></div>
+          <div class="trow"><span class="trow__k">Cohorte 2027 verificable</span><span class="trow__d"></span><span class="trow__v">405</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · QUOTE -->
+  <section class="quote" data-label="Cita">
+    <div class="pad">
+      <div class="quote__mark">"</div>
+      <div class="quote__text">Las buenas madres dan buenas hijas — la señal más fuerte del dataset.</div>
+      <div class="quote__by">SHAP · Predictor #1 · IHM de la madre</div>
+    </div>
+  </section>
+
+  <!-- 6 · ROADMAP -->
+  <section data-label="La Visión">
+    <div class="pad">
+      <div class="head-block" style="margin-bottom:20px"><div class="eyebrow">La visión</div><div class="disp">De exploración a herramienta real.</div></div>
+      <div class="road">
+        <div class="rcard" style="--accent:var(--green-500)"><div class="rcard__y">Ahora · Año 1</div><div class="rcard__n">Auditoría &amp; Documentación</div><ul><li>Entregar el informe al campo</li><li>Registrar IHM, peso, bajas</li><li>Hablar con 2–3 campos</li></ul></div>
+        <div class="rcard" style="--accent:var(--gold-500)"><div class="rcard__y">Año 2</div><div class="rcard__n">Modelo Multifinca</div><ul><li>3 campos estandarizados</li><li>Reconstruir con variables nuevas</li><li>Validar en campos externos</li></ul></div>
+        <div class="rcard" style="--accent:var(--clay-500)"><div class="rcard__y">Año 3</div><div class="rcard__n">Plataforma Completa</div><ul><li>Autoservicio web</li><li>Vista retrospectiva</li><li>Base pampeana creciente</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · CLOSING -->
+  <section class="close" data-label="Cierre">
+    <div class="pad">
+      <div class="close__grid">
+        <div class="close__photo"></div>
+        <div>
+          <div class="eyebrow" style="color:var(--green-300)">El equipo detrás</div>
+          <div class="close__name" style="margin-top:18px">Tatiana Quinn</div>
+          <div class="close__role">Computer Science &amp; AI · IE University, Madrid</div>
+          <div class="close__bio">Ingeniería de datos sobre nueve fuentes crudas, el pipeline reproducible, el modelado con holdout temporal y este sistema de diseño — de punta a punta.</div>
+          <div class="chips"><span class="chip">Machine Learning</span><span class="chip">scikit-learn</span><span class="chip">SHAP</span><span class="chip">Data Storytelling</span></div>
+          <div class="close__link" style="margin-top:40px">linkedin.com/in/tatianaquinn</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</deck-stage>
+<script src="deck-stage.js"></script>
+</body>
+</html>

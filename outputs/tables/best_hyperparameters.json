@@ -1,0 +1,29 @@
+{
+  "ridge": {
+    "params": {
+      "alpha": 75.7947995334801
+    },
+    "best_cv_r2": 0.03515961068514732,
+    "best_cv_r2_std": 0.08039443181103774
+  },
+  "random_forest": {
+    "params": {
+      "max_depth": 5,
+      "max_features": "sqrt",
+      "min_samples_leaf": 3,
+      "n_estimators": 439
+    },
+    "best_cv_r2": 0.09188700434615049,
+    "best_cv_r2_std": 0.0841365370119132
+  },
+  "gradient_boost": {
+    "params": {
+      "learning_rate": 0.013833507535062186,
+      "max_depth": 4,
+      "n_estimators": 111,
+      "subsample": 0.7
+    },
+    "best_cv_r2": 0.10139626558079487,
+    "best_cv_r2_std": 0.06494085844830548
+  }
+}
