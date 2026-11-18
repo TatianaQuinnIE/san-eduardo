@@ -90,7 +90,6 @@ def main():
         'outcomes': outcomes,
         'supervised': ds,
         'rule_doc': eval_doc,
-        'rule_rev': eval_rev,
     }
 
 
